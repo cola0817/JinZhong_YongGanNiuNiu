@@ -8,7 +8,7 @@
   <p align="center">
    晋中学院 ~
     <br />
-    <a href="https://github.com/cola0817/JinZhong_YongGanNiuNiu/issues/tree/master/"><strong>项目文档</strong></a>
+    <a href="https://github.com/cola0817/JinZhong_YongGanNiuNiu"><strong>项目文档</strong></a>
     <br />
     <br />
     <a href="https://github.com/cola0817/JinZhong_YongGanNiuNiu/issues/issues">Report Bug</a>
@@ -34,7 +34,7 @@
 
 ### Installation
 
-1. Get overview at [Document | 文档]([Issues · cola0817/JinZhong_YongGanNiuNiu (github.com)](https://github.com/cola0817/JinZhong_YongGanNiuNiu))
+1. Get overview at [Document | 文档](https://github.com/cola0817/JinZhong_YongGanNiuNiu)
 2. Clone the repo
 
 ```shell
