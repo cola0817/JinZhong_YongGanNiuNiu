@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace 等于 mapper 接口类的全限定名,这样实现对应 -->
+<mapper namespace="edu.jzxy.cbq.mapper.EmployeeMapper">
+
+    <!-- 专门声明一个 resultMap 设定 column 到 property 之间的对应关系 -->
+    <resultMap id="selectEmployeeByRMResultMap" type="edu.jzxy.cbq.entity.Employee">
+
+        <!-- 使用 id 标签设置主键列和主键属性之间的对应关系 -->
+        <!-- column 属性用于指定字段名；property 属性用于指定 Java 实体类属性名 -->
+        <id column="emp_id" property="empId"/>
+
+        <!-- 使用 result 标签设置普通字段和 Java 实体类属性之间的关系 -->
+        <result column="emp_name" property="empName"/>
+
+        <result column="emp_salary" property="empSalary"/>
+
+    </resultMap>
+
+    <!-- 查询使用 select 标签
+            id = 方法名
+            resultType = 返回值类型
+            标签内编写 SQL 语句
+     -->
+    <select id="findEmployeeById" resultType="edu.jzxy.cbq.entity.Employee">
+        <!-- #{empId} 代表动态传入的参数,并且进行赋值 -->
+        select emp_id empId,emp_name empName, emp_salary empSalary from
+        t_emp where emp_id = #{empId}
+    </select>
+
+    <select id="findEmployeeByIdV2ForResultMap" resultMap="selectEmployeeByRMResultMap">
+        select emp_id,emp_name,emp_salary from t_emp where emp_id=#{empId}
+    </select>
+
+    <insert id="insertEmployee">
+        insert into t_emp(emp_name,emp_salary) values(#{empName},#{empSalary})
+    </insert>
+
+    <insert id="insertEmployeeV2" useGeneratedKeys="true" keyProperty="empId">
+        insert into t_emp(emp_name,emp_salary) values(#{empName},#{empSalary})
+    </insert>
+
+    <update id="updateEmployee">
+        update t_emp set emp_salary=#{empSalary} where emp_id=#{empId}
+    </update>
+
+    <update id="updateEmployeeByMap">
+        update t_emp set emp_salary=#{empSalary} where emp_id=#{empId}
+    </update>
+
+    <select id="selectEmpCount" resultType="int">
+        select count(*) from t_emp
+    </select>
+
+    <select id="selectEmpNameAndMaxSalary" resultType="map">
+        SELECT
+        emp_name 员工姓名,
+        emp_salary 员工工资,
+        (SELECT AVG(emp_salary) FROM t_emp) 部门平均工资
+        FROM t_emp WHERE emp_salary=(
+        SELECT MAX(emp_salary) FROM t_emp
+        )
+    </select>
+
+    <select id="findAllEmployee" resultType="edu.jzxy.cbq.entity.Employee">
+        select emp_id empId,emp_name empName,emp_salary empSalary
+        from t_emp
+    </select>
+
+
+</mapper>
