@@ -17,6 +17,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mybatis_plus_helloWorld</module>
+        <module>mybatis_plus_crud</module>
     </modules>
 
     <properties>

@@ -195,17 +195,89 @@ class UserMapperTest {
 
 ## 2.1 基于 Mapper 接口 CRUD
 
-
+通用 CRUD 封装 [BaseMapper](https://gitee.com/baomidou/mybatis-plus/blob/3.0/mybatis-plus-core/src/main/java/com/baomidou/mybatisplus/core/mapper/BaseMapper.java?spm=wolai.workspace.0.0.330e2306K5MWaO&file=BaseMapper.java)接口， Mybatis-Plus 启动时自动解析实体表关系映射转换为 Mybatis 内部对象注入容器! 内部包含常见的单表操作！
 
 ### 2.1.1 INSERT 方法
 
+```java
+```
+
+| 类型 | 参数名 | 描述     |
+| ---- | ------ | -------- |
+| T    | entity | 实体对象 |
+
 ### 2.1.2 DELETE 方法
+
+```java
+
+```
+
+| 类型                               | 参数名    | 描述                                 |
+| ---------------------------------- | --------- | ------------------------------------ |
+| Wrapper<T>                         | wrapper   | 实体对象封装操作类（可以为 null）    |
+| Collection<? extends Serializable> | idList    | 主键 ID 列表(不能为 null 以及 empty) |
+| Serializable                       | id        | 主键 ID                              |
+| Map<String, Object>                | columnMap | 表字段 map 对象                      |
 
 ### 2.1.3 UPDATE 方法
 
+```java
+```
+
+| 类型       | 参数名        | 描述                                                         |
+| ---------- | ------------- | ------------------------------------------------------------ |
+| T          | entity        | 实体对象 (set 条件值,可为 null)                              |
+| Wrapper<T> | updateWrapper | 实体对象封装操作类（可以为 null,里面的 entity 用于生成 where 语句） |
+
 ### 2.1.4 SELECT 方法
 
+```java
+```
+
+| 类型                               | 参数名       | 描述                                     |
+| ---------------------------------- | ------------ | ---------------------------------------- |
+| Serializable                       | id           | 主键 ID                                  |
+| Wrapper<T>                         | queryWrapper | 实体对象封装操作类（可以为 null）        |
+| Collection<? extends Serializable> | idList       | 主键 ID 列表(不能为 null 以及 empty)     |
+| Map<String, Object>                | columnMap    | 表字段 map 对象                          |
+| IPage<T>                           | page         | 分页查询条件（可以为 RowBounds.DEFAULT） |
+
 ### 2.1.5 自定义和多表映射
+
+mybatis-plus 的默认 mapperxml 位置
+
+```yaml
+mybatis-plus: # mybatis-plus的配置
+  # 默认位置 private String[] mapperLocations = new String[]{"classpath*:/mapper/**/*.xml"};    
+  mapper-locations: classpath:/mapper/*.xml
+```
+
+自定义mapper方法：
+
+```java
+public interface UserMapper extends BaseMapper<User> {
+
+    //正常自定义方法！
+    //可以使用注解@Select或者mapper.xml实现
+    List<User> queryAll();
+}
+```
+
+基于mapper.xml实现：
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace = 接口的全限定符 -->
+<mapper namespace="com.atguigu.mapper.UserMapper">
+
+   <select id="queryAll" resultType="user" >
+       select * from user
+   </select>
+</mapper>
+```
 
 
 
@@ -218,6 +290,8 @@ class UserMapperTest {
 ### 2.2.2 使用 IService 接口方式
 
 ### 2.2.3 CRUD 方法介绍
+
+
 
 ## 2.3 分页查询的实现
 
