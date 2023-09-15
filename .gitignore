@@ -28,4 +28,4 @@ replay_pid*
 *.iml
 .fastRequest
 
-*.target/
+**.target/
