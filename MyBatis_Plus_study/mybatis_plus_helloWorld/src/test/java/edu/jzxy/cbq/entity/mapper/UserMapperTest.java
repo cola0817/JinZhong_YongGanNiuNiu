@@ -11,7 +11,6 @@ import java.util.List;
 
 
 @SpringBootTest
-
 class UserMapperTest {
 
     @Autowired
@@ -25,4 +24,9 @@ class UserMapperTest {
         userList.forEach(System.out::println);
     }
 
+    @Test
+    void testSelectById() {
+        User user = userMapper.selectById(1);
+        System.out.println(user);
+    }
 }
