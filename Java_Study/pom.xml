@@ -12,6 +12,7 @@
         <module>basic</module>
         <module>demo</module>
         <module>small_sample</module>
+        <module>book</module>
     </modules>
 
     <properties>
