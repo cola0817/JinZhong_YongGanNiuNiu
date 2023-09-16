@@ -1,18 +1,18 @@
-package edu.jzxy.cbq.day02;
+package edu.jzxy.cbq.day03;
 
 import java.util.regex.Pattern;
 
 /**
  * @author Cola0817
- * @name regexDemo
- * @date 2023/9/16 17:43
+ * @name RegexDemo
+ * @date 2023/9/16 21:15
  * @since 1.0.0
  */
-public class regexDemo {
+public class RegexDemo {
     public static void main(String[] args) {
-        String regex = ".*Cola.*";
-        String text = "Cola123RH";
 
+        String text = "Cola777RH";
+        String regex = ".*Cola.*";
         boolean matches = Pattern.matches(regex, text);
         System.out.println("matches = " + matches);
     }

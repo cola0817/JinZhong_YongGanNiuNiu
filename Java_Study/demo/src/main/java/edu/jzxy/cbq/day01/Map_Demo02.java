@@ -18,7 +18,6 @@ public class Map_Demo02 {
          * 每个班级的人数为 48 53 62 人
          * age 为 18 - 20  month 为 1 - 12
          */
-
         Random random = new Random();
         int[] counts = {48, 53, 62};
         String classNamePrefix = "class_ ";
@@ -41,46 +40,47 @@ public class Map_Demo02 {
             classIndex++;
             classMap.put(className, studentList);
         }
-        write2Text(classMap);
-//        readForText(classMap);
 
+        String filePath = "classMap.csv";
+        write2Csv(classMap,filePath);
+
+        readForCsv(classMap,filePath);
 
     }
 
-    public static void write2Text(Map<String, List<Student>> classMap) throws IOException {
-
-        BufferedWriter writer = new BufferedWriter(new FileWriter("classMap.txt"));
-
-        classMap.forEach((className, studentList) -> {
-
-            try {
-                writer.write(className);
-                studentList.forEach(student -> {
-                    try {
-                        writer.write(student.toString());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
-                });
-            } catch (IOException e) {
-                throw new RuntimeException(e);
+    /**
+     * 写入 Csv
+     * @param classMap classMap
+     * @throws IOException  IOException
+     */
+    public static void write2Csv(Map<String,List<Student>> classMap,String filePath) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        Set<String> keySet = classMap.keySet();
+        List<String> keyList = keySet.stream().toList();
+        for (String key : keyList) {
+            writer.write(key);
+            writer.write("\n");
+            List<Student> studentList = classMap.get(key);
+            for (Student student : studentList) {
+                writer.write(student.toString());
+                writer.write("\n");
             }
-        });
-
-
-        BufferedReader reader = new BufferedReader(new FileReader("classMap.txt"));
-
+        }
+        writer.close();
     }
 
-    public static void readForText(Map<String, List<Student>> classMap) throws IOException {
+    /**
+     * 从 Csv 中读取
+     * @param classMap classMap
+     * @throws IOException IOException
+     */
+    public static void readForCsv(Map<String,List<Student>> classMap,String filePath) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-        BufferedReader reader = new BufferedReader(new FileReader("classMap.txt"));
         String line;
-        while ((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null){
             System.out.println(line);
         }
-        reader.close();
-
     }
 
 }

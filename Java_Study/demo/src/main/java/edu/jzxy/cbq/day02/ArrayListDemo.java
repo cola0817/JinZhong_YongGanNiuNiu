@@ -16,7 +16,7 @@ public class ArrayListDemo {
         for (int i = 0; i < numbers.length ; i++) {
              numbers[i] = random.nextInt(1, 101);
         }
-        List<Integer> list = Arrays.stream(numbers).sorted().collect(Collectors.toList());
+        List<Integer> list = Arrays.stream(numbers).sorted().toList();
         list.forEach(System.out::println);
     }
 }
