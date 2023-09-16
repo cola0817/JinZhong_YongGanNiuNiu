@@ -1,8 +1,6 @@
 package edu.jzxy.cbq.day01;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Cola0817
@@ -18,16 +16,39 @@ public class Map_Demo01 {
          * 每个班级的人数为 48 53 62 人
          * age 为 18 - 20  month 为 1 - 12
          */
-        Map<String, List<Student>> classes_1 = new HashMap<>();
-        Map<String, List<Student>> classes_2 = new HashMap<>();
-        Map<String, List<Student>> classes_3 = new HashMap<>();
 
+        Random random = new Random();
         int[] counts = new int[]{48, 53, 62};
+        int classIndex = 0;
+        Map<String, List<Student>> classInfo = new HashMap<>();
+        Map<Integer, List<Student>> classInfoGroupByMonth = new HashMap<>();
+        for (int i = 0; i < counts.length; i++) {
+            String className = "class_" + classIndex;
+            int count = counts[classIndex];
+            List<Student> studentList = new ArrayList<>();
 
-        for (int count : counts) {
-
+            while (count != 0) {
+                int month_random = random.nextInt(1, 13);
+                int age_random = random.nextInt(18, 21);
+                Student student = new Student("student_" + count, age_random, month_random);
+                studentList.add(student);
+                count -= 1;
+            }
+            classIndex++;
+            classInfo.put(className, studentList);
+        }
+        for (List<Student> studentList : classInfo.values()) {
+            for (int i = 1; i < 13; i++) {
+                List<Student> list = new ArrayList<>();
+                for (Student student : studentList) {
+                    if (student.getMonth() == i){
+                        list.add(student);
+                    }
+                }
+                classInfoGroupByMonth.put(i, list);
+            }
         }
 
-
+        classInfoGroupByMonth.values().forEach(System.out::println);
     }
 }

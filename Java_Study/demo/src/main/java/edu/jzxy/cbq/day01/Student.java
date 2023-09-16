@@ -1,5 +1,6 @@
 package edu.jzxy.cbq.day01;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Data;
  * @since 1.0.0
  */
 @Data
+@AllArgsConstructor
 public class Student {
     String name;
     int age;
