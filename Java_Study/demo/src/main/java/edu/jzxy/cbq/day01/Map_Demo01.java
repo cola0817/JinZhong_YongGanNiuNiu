@@ -38,17 +38,24 @@ public class Map_Demo01 {
             classInfo.put(className, studentList);
         }
         for (List<Student> studentList : classInfo.values()) {
+            int numbers = 0;
             for (int i = 1; i < 13; i++) {
                 List<Student> list = new ArrayList<>();
                 for (Student student : studentList) {
                     if (student.getMonth() == i){
                         list.add(student);
+                        numbers += 1;
                     }
                 }
                 classInfoGroupByMonth.put(i, list);
-            }
-        }
 
-        classInfoGroupByMonth.values().forEach(System.out::println);
+            }
+            System.out.println(numbers);
+        }
+        int count = 0;
+        for (List<Student> value : classInfoGroupByMonth.values()) {
+            count += 1;
+        }
+        System.out.println("count = " + count);
     }
 }
