@@ -13,7 +13,7 @@ public class Java1SArray {
          * 一维数组的定义：
          * dataType [] arrayName
          * dataType arrayName []
-         * demo:
+         * Client:
          * int [] a,b; // a,b 均为数组
          * int x[], y; // x 为数组 y 为普通变量
          * 一维数组的初始化：
